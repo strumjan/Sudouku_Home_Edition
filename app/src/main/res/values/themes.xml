@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.SudokuHomeEdition" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="NumberPadButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:background">@drawable/number_pad_button_background</item>
+        <item name="android:textColor">#555555</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

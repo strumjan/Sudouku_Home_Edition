@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="?android:attr/buttonBarStyle"
+    android:background="#fefefe"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <Button
+        android:id="@+id/btnEasy"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/easy"
+        android:textColor="#555555"/>
+
+    <Button
+        android:id="@+id/btnMedium"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/medium"
+        android:textColor="#555555"/>
+
+    <Button
+        android:id="@+id/btnHard"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/hard"
+        android:textColor="#555555"/>
+</LinearLayout>
