@@ -5,6 +5,8 @@ class JigsawSudokuGame(val difficulty: SudokuGame.Difficulty) : SudokuGameLogic 
     private val board = Array(9) { IntArray(9) }
     private val solution = Array(9) { IntArray(9) }
     private val fixed = Array(9) { BooleanArray(9) }
+    private var attemptCount = 0
+    private val maxAttempts = 10000
 
     // ✅ Фиксна, тестирана regionMap
     val regionMap = generateJigsawRegionMap()
@@ -86,9 +88,33 @@ class JigsawSudokuGame(val difficulty: SudokuGame.Difficulty) : SudokuGameLogic 
     }
     // ✅ Генерира табла користејќи класична логика (за сигурност)
     private fun generateFullBoard() {
-        val empty = mutableListOf<Pair<Int, Int>>()
-        for (i in 0 until 9) for (j in 0 until 9) empty.add(i to j)
-        solveClassic(board, empty, 0)
+        var success = false
+        while (!success) {
+            val empty = mutableListOf<Pair<Int, Int>>()
+            for (i in 0 until 9) for (j in 0 until 9) empty.add(i to j)
+
+            // Обавезно ресетирање на таблата
+            for (i in 0 until 9) for (j in 0 until 9) board[i][j] = 0
+
+            attemptCount = 0
+            success = solveJigsaw(board, empty, 0)
+        }
+    }
+
+
+    private fun solveJigsaw(grid: Array<IntArray>, empty: List<Pair<Int, Int>>, index: Int): Boolean {
+        if (index == empty.size) return true
+        if (attemptCount++ > maxAttempts) return false
+
+        val (row, col) = empty[index]
+        for (num in (1..9).shuffled()) {
+            if (isValidJigsaw(grid, row, col, num)) {
+                grid[row][col] = num
+                if (solveJigsaw(grid, empty, index + 1)) return true
+                grid[row][col] = 0
+            }
+        }
+        return false
     }
 
     // ✅ Класично решавање (3x3 box логика)
@@ -170,12 +196,6 @@ class JigsawSudokuGame(val difficulty: SudokuGame.Difficulty) : SudokuGameLogic 
             if (!isCellCorrect(i, j)) return false
         }
         return true
-    }
-
-    // ✅ За визуелна проверка или боја
-    fun isMoveValid(row: Int, col: Int, number: Int): Boolean {
-        return isValidJigsaw(board, row, col, number)
-
     }
 
     override fun getRegionId(row: Int, col: Int): Int {

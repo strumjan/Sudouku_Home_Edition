@@ -4,10 +4,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sudokuhomeedition.databinding.ActivityGameBinding
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class GameActivity : AppCompatActivity() {
 
@@ -21,6 +27,7 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        boardView = findViewById(R.id.sudokuBoard)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
@@ -37,14 +44,26 @@ class GameActivity : AppCompatActivity() {
             else -> SudokuGame.Difficulty.EASY
         }
 
-        sudokuGame = if (isJigsaw) {
-            JigsawSudokuGame(difficulty)
-        } else {
-            SudokuGame(difficulty)
+        lifecycleScope.launch {
+            if (isJigsaw) {
+                binding.progressBar.visibility = View.VISIBLE
+
+                val game = withContext(Dispatchers.Default) {
+                    JigsawSudokuGame(difficulty)
+                }
+
+                sudokuGame = game
+                boardView = findViewById(R.id.sudokuBoard)
+                boardView.setGame(sudokuGame)
+
+                binding.progressBar.visibility = View.GONE
+            } else {
+                sudokuGame = SudokuGame(difficulty)
+                boardView = findViewById(R.id.sudokuBoard)
+                boardView.setGame(sudokuGame)
+            }
         }
 
-        boardView = findViewById(R.id.sudokuBoard)
-        boardView.setGame(sudokuGame)
 
         boardView.setOnCellTouchListener { row, col ->
             if (sudokuGame.isCellEditable(row, col)) {

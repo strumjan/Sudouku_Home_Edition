@@ -1,118 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutGame"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fefefe"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="12dp">
-
-    <com.sudokuhomeedition.SudokuBoardView
-        android:id="@+id/sudokuBoard"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1" />
-
-    <GridLayout
-        android:id="@+id/numberPad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="52dp"
-        android:alignmentMode="alignMargins"
-        android:columnCount="5"
-        android:rowCount="2">
-
-        <!-- Buttons 1 to 9 -->
-        <Button
-            android:id="@+id/btn1"
-            style="@style/NumberPadButton"
-            android:text="@string/_1" />
-
-        <Button
-            android:id="@+id/btn2"
-            style="@style/NumberPadButton"
-            android:text="@string/_2" />
-
-        <Button
-            android:id="@+id/btn3"
-            style="@style/NumberPadButton"
-            android:text="@string/_3" />
-
-        <Button
-            android:id="@+id/btn4"
-            style="@style/NumberPadButton"
-            android:text="@string/_4" />
-
-        <Button
-            android:id="@+id/btn5"
-            style="@style/NumberPadButton"
-            android:text="@string/_5" />
-
-        <Button
-            android:id="@+id/btn6"
-            style="@style/NumberPadButton"
-            android:text="@string/_6" />
-
-        <Button
-            android:id="@+id/btn7"
-            style="@style/NumberPadButton"
-            android:text="@string/_7" />
-
-        <Button
-            android:id="@+id/btn8"
-            style="@style/NumberPadButton"
-            android:text="@string/_8" />
-
-        <Button
-            android:id="@+id/btn9"
-            style="@style/NumberPadButton"
-            android:text="@string/_9" />
-
-        <Button
-            android:id="@+id/btnErase"
-            style="@style/NumberPadButton"
-            android:text="@string/erase" />
-    </GridLayout>
+    android:background="#fefefe">
 
     <LinearLayout
+        android:id="@+id/layoutGame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:attr/buttonBarStyle"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:background="#fefefe"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="12dp">
 
-        <Button
-            android:id="@+id/btnNew"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/number_pad_button_background"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:text="@string/new_sudoku"
-            android:textColor="#555555"/>
+        <com.sudokuhomeedition.SudokuBoardView
+            android:id="@+id/sudokuBoard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/btnExit"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+        <GridLayout
+            android:id="@+id/numberPad"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:background="@drawable/number_pad_button_background"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:text="@string/exit"
-            android:textColor="#555555"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="52dp"
+            android:alignmentMode="alignMargins"
+            android:columnCount="5"
+            android:rowCount="2">
+
+            <!-- Buttons 1 to 9 -->
+            <Button
+                android:id="@+id/btn1"
+                style="@style/NumberPadButton"
+                android:text="@string/_1" />
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/NumberPadButton"
+                android:text="@string/_2" />
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/NumberPadButton"
+                android:text="@string/_3" />
+
+            <Button
+                android:id="@+id/btn4"
+                style="@style/NumberPadButton"
+                android:text="@string/_4" />
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/NumberPadButton"
+                android:text="@string/_5" />
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/NumberPadButton"
+                android:text="@string/_6" />
+
+            <Button
+                android:id="@+id/btn7"
+                style="@style/NumberPadButton"
+                android:text="@string/_7" />
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/NumberPadButton"
+                android:text="@string/_8" />
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/NumberPadButton"
+                android:text="@string/_9" />
+
+            <Button
+                android:id="@+id/btnErase"
+                style="@style/NumberPadButton"
+                android:text="@string/erase" />
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarStyle"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnNew"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/number_pad_button_background"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="@string/new_sudoku"
+                android:textColor="#555555"/>
+
+            <Button
+                android:id="@+id/btnExit"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/number_pad_button_background"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:text="@string/exit"
+                android:textColor="#555555"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>
