@@ -16,4 +16,7 @@
     <string name="new_sudoku">New Sudoku</string>
     <string name="exit">Exit</string>
     <string name="congratulations_sudoku_solved">🎉 Congratulations! Sudoku solved!</string>
+    <string name="easy_jigsaw">Easy Jigsaw</string>
+    <string name="medium_jigsaw">Medium Jigsaw</string>
+    <string name="hard_jigsaw">Hard Jigsaw</string>
 </resources>

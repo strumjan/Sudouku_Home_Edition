@@ -1,6 +1,5 @@
 package com.sudokuhomeedition
 
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,13 +8,12 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sudokuhomeedition.databinding.ActivityGameBinding
-import androidx.core.graphics.toColorInt
 
 class GameActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGameBinding
     private lateinit var boardView: SudokuBoardView
-    private lateinit var sudokuGame: SudokuGame
+    private lateinit var sudokuGame: SudokuGameLogic
     private var selectedRow = -1
     private var selectedCol = -1
 
@@ -28,17 +26,22 @@ class GameActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }, 10 * 60 * 1000) // 10 minutes in milliseconds
+        }, 30 * 60 * 1000) // 30 minutes in milliseconds
 
+        val difficultyStr = intent.getStringExtra("difficulty") ?: "EASY"
+        val isJigsaw = intent.getBooleanExtra("isJigsaw", false)
 
-        val difficulty = intent.getStringExtra("difficulty") ?: "EASY"
-        sudokuGame = SudokuGame(
-            when (difficulty) {
-                "MEDIUM" -> SudokuGame.Difficulty.MEDIUM
-                "HARD" -> SudokuGame.Difficulty.HARD
-                else -> SudokuGame.Difficulty.EASY
-            }
-        )
+        val difficulty = when (difficultyStr.uppercase()) {
+            "MEDIUM" -> SudokuGame.Difficulty.MEDIUM
+            "HARD" -> SudokuGame.Difficulty.HARD
+            else -> SudokuGame.Difficulty.EASY
+        }
+
+        sudokuGame = if (isJigsaw) {
+            JigsawSudokuGame(difficulty)
+        } else {
+            SudokuGame(difficulty)
+        }
 
         boardView = findViewById(R.id.sudokuBoard)
         boardView.setGame(sudokuGame)
@@ -52,35 +55,14 @@ class GameActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnNew.setOnClickListener {
-            finish() // враќа на почетниот екран
-        }
-
-        binding.btnExit.setOnClickListener {
-            finishAffinity() // целосно затворање на апликацијата
-        }
-
         binding.apply {
-            // Number pad actions
-            val numberButtons = listOf(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9)
-            numberButtons.forEachIndexed { index, button ->
+            val buttons = listOf(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9)
+            buttons.forEachIndexed { index, button ->
                 button.setOnClickListener {
-                    if (selectedRow in 0..8 && selectedCol in 0..8 && sudokuGame.isCellEditable(selectedRow, selectedCol)) {
-                        val number = index + 1
-                        sudokuGame.setCell(selectedRow, selectedCol, number)
-
-                        val isValid = sudokuGame.isMoveValid(selectedRow, selectedCol, number)
-
-                        // Сетира боја врз основа на точноста
-                        boardView.setCellColor(
-                            selectedRow,
-                            selectedCol,
-                            if (isValid) Color.BLACK else "#e85d04".toColorInt()
-                        )
-
+                    if (selectedRow in 0..8 && selectedCol in 0..8) {
+                        sudokuGame.setCell(selectedRow, selectedCol, index + 1)
                         boardView.setSelectedCell(selectedRow, selectedCol)
                         boardView.invalidate()
-
                         if (sudokuGame.isSolved()) {
                             val inflater = layoutInflater
                             val layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.toast_layout_root))
@@ -95,23 +77,19 @@ class GameActivity : AppCompatActivity() {
             }
 
             btnErase.setOnClickListener {
-                if (selectedRow in 0..8 && selectedCol in 0..8 && sudokuGame.isCellEditable(selectedRow, selectedCol)) {
+                if (selectedRow in 0..8 && selectedCol in 0..8) {
                     sudokuGame.setCell(selectedRow, selectedCol, 0)
-
-                    boardView.setCellColor(selectedRow, selectedCol, Color.BLACK) // враќа нормална боја
                     boardView.invalidate()
                 }
             }
 
             btnNew.setOnClickListener {
-                finish() // враќа на почетен екран
+                finish()
             }
 
             btnExit.setOnClickListener {
-                finishAffinity() // затвора целата апликација
+                finishAffinity()
             }
         }
-
     }
-
 }

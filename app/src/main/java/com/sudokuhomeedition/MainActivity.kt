@@ -13,20 +13,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnEasy.setOnClickListener {
-            startGame("EASY")
-        }
-        binding.btnMedium.setOnClickListener {
-            startGame("MEDIUM")
-        }
-        binding.btnHard.setOnClickListener {
-            startGame("HARD")
-        }
+        /// Classic
+        binding.btnEasy.setOnClickListener { startGame("EASY", false) }
+        binding.btnMedium.setOnClickListener { startGame("MEDIUM", false) }
+        binding.btnHard.setOnClickListener { startGame("HARD", false) }
+
+        // Jigsaw
+        binding.btnEasyJigsaw.setOnClickListener { startGame("EASY", true) }
+        binding.btnMediumJigsaw.setOnClickListener { startGame("MEDIUM", true) }
+        binding.btnHardJigsaw.setOnClickListener { startGame("HARD", true) }
     }
 
-    private fun startGame(difficulty: String) {
-        val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra("difficulty", difficulty)
+    private fun startGame(difficulty: String, isJigsaw: Boolean) {
+        val intent = Intent(this, GameActivity::class.java).apply {
+            putExtra("difficulty", difficulty)
+            putExtra("isJigsaw", isJigsaw)
+        }
         startActivity(intent)
     }
 }

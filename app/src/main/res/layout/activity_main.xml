@@ -9,6 +9,7 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <!-- Classic Sudoku buttons -->
     <Button
         android:id="@+id/btnEasy"
         style="?android:attr/buttonBarButtonStyle"
@@ -48,5 +49,48 @@
         android:paddingRight="14dp"
         android:paddingBottom="4dp"
         android:text="@string/hard"
+        android:textColor="#555555"/>
+
+    <!-- Jigsaw Sudoku buttons -->
+    <Button
+        android:id="@+id/btnEasyJigsaw"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/easy_jigsaw"
+        android:textColor="#555555"/>
+
+    <Button
+        android:id="@+id/btnMediumJigsaw"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/medium_jigsaw"
+        android:textColor="#555555"/>
+
+    <Button
+        android:id="@+id/btnHardJigsaw"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/number_pad_button_background"
+        android:paddingLeft="14dp"
+        android:paddingTop="4dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="4dp"
+        android:text="@string/hard_jigsaw"
         android:textColor="#555555"/>
 </LinearLayout>
